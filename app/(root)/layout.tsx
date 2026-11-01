@@ -1,17 +1,12 @@
+import {ClerkProvider} from '@clerk/nextjs';
+import {dark} from '@clerk/themes';
 import type {Metadata} from 'next';
-import {Geist, Geist_Mono} from 'next/font/google';
-import '../globals.css';
+import {Inter} from 'next/font/google';
 import React from 'react';
 
-const geistSans = Geist({
-    variable: '--font-geist-sans',
-    subsets: ['latin'],
-});
+import '../globals.css';
 
-const geistMono = Geist_Mono({
-    variable: '--font-geist-mono',
-    subsets: ['latin'],
-});
+const inter = Inter({subsets: ['latin']});
 
 export const metadata: Metadata = {
     title: 'Threads',
@@ -21,11 +16,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: Readonly<{ children: React.ReactNode }>) {
     return (
-        <html lang="en">
-        <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {children}
-        </body>
-        </html>
+        <ClerkProvider appearance={{baseTheme: dark}}>
+            <html lang="en">
+            <body className={`${inter.className} bg-dark-1`}>{children}</body>
+            </html>
+        </ClerkProvider>
     );
 }
